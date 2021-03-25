@@ -1,22 +1,93 @@
-game()
 
+const buttons = document.querySelectorAll("button")
+let button;
+// Setup event listeners for rock/paper/scissor buttons
+for (i = 0; i < buttons.length; i++) {
+	button = buttons[i];
+	button.addEventListener("click", playRound);
+}
 
-function game() {
+function playRound() {
+	let playerSelectionRound = this.textContent;
+	let computerSelectionRound = computerPlay();
+
+	let roundResult = roundRockPaperScissors(playerSelectionRound, computerSelectionRound);
+
+	let resultDiv = document.getElementById('resultString');
 	
-	let playerSelectionRound;
-	let computerSelectionRound;
-	
-	for (i = 0; i < 5; i++) {
-		playerSelectionRound = window.prompt("Rock, Paper, or Scissors?");
-		computerSelectionRound = computerPlay();
-		console.log(roundRockPaperScissors(playerSelectionRound, computerSelectionRound));
+	// Print off round result
+	if (resultDiv.hasChildNodes()) {
+		const resultContent = resultDiv.childNodes[0];
+		resultContent.textContent = roundResult;
 	}
+	else {
+		const resultContent = document.createElement("p");
+		resultContent.textContent = roundResult;
+		resultDiv.appendChild(resultContent);
+	}
+	
+
+	let resultString = roundResult.split(" ")[1]
+	let winner;
+	if (resultString === "Win!") {
+		winner = "p";
+	}
+	else if (resultString === "Lose!") {
+		winner = "c";
+	}
+	else {
+		return;
+	}
+
+	updateScore(winner);
+
+	return;
+}
+
+function updateScore(winner) {
+	
+	if (winner == "p") {
+		winnerID = "playerScore"
+	}
+	else if (winner === "c") {
+		winnerID = "computerScore"
+	}
+
+	else {
+		return;
+	}
+
+	// Update scoreboard
+	let winnerSpan = document.getElementById(winnerID);
+	let score = winnerSpan.textContent;
+	score = Number(score) + 1;
+
+	winnerSpan.textContent = score;
+
+	// Game over when score hits 5
+	if (score === 5 && winner == "p") {
+		let resultDiv = document.getElementById('resultString');
+		resultDiv.childNodes[0].textContent = "Congratulations you won!"
+		for (i = 0; i < buttons.length; i++) {
+			button = buttons[i];
+			button.removeEventListener("click", playRound);
+		}
+	}
+	else if (score === 5 && winner == "c") {
+		let resultDiv = document.getElementById('resultString');
+		resultDiv.childNodes[0].textContent = "Sorry the computer has won."
+		for (i = 0; i < buttons.length; i++) {
+			button = buttons[i];
+			button.removeEventListener("click", playRound);
+		}
+	}
+
 }
 
 
 function roundRockPaperScissors(playerSelection, computerSelection) {
 	
-	//Fix word case
+	// Fix word case
 	let correctPlayerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
 	
 	let winnerString = `You Win! ${playerSelection} beats ${computerSelection}`
@@ -47,11 +118,9 @@ function roundRockPaperScissors(playerSelection, computerSelection) {
 		
 	}
 }
-	
-	
-
 
 function computerPlay() {
+
 	let computerHand = getRandomInt(0, 2);
 	// Arbitrarily map numbers to rock, paper, and scissors
 	if (computerHand === 0) {

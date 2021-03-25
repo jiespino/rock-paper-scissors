@@ -3,9 +3,26 @@
 <head>
   <title>Page Title</title>
   <meta charset="UTF-8"/>
-  <script src="scripts/rock_paper_scissors.js"></script>
+  <link href="styles/style.css" rel="stylesheet">
 </head>
 <body>
-	<p>TEST RUN</p>
+  <h1>Rock Paper Scissors!</h1>
+	<div id="buttons">
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissor">Scissors</button>
+  </div>
+
+  <div id="scoreboard">
+    <span id="playerScore">0</span> - <span id="computerScore">0</span>
+  </div>
+  <div>
+    <span>Player</span>-<span>Computer</span>
+  </div>
+
+  <div id="resultString">
+  </div>
+
 </body>
+<script src="scripts/rock_paper_scissors.js"></script>
 </html>
