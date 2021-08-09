@@ -7,6 +7,29 @@ for (i = 0; i < buttons.length; i++) {
 	button.addEventListener("click", playRound);
 }
 
+let resetButton = document.getElementById('resetButton');
+resetButton.addEventListener("click", resetScores)
+
+function resetScores() {
+	let playerScore = document.getElementById("playerScore");
+	let compScore = document.getElementById("computerScore");
+
+	playerScore.textContent = 0;
+	compScore.textContent = 0;
+
+	// Remove winner text
+	let resultDiv = document.getElementById('resultString');
+	resultDiv.childNodes[0].textContent = ""
+
+	const buttons = document.querySelectorAll("button")
+	let button;
+	// Setup event listeners for rock/paper/scissor buttons
+	for (i = 0; i < buttons.length; i++) {
+		button = buttons[i];
+		button.addEventListener("click", playRound);
+}
+}
+
 function playRound() {
 	let playerSelectionRound = this.textContent;
 	let computerSelectionRound = computerPlay();

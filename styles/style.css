@@ -1,10 +1,21 @@
-div {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100px;
 }
 
+#resetButton {
+    margin: auto;
+}
+
+p {
+    text-align: center;
+}
 h1 {
     text-align: center;
+}
+
+#resetButton {
+    display: block;
 }
