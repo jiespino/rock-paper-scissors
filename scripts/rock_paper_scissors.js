@@ -116,7 +116,10 @@ function roundRockPaperScissors(playerSelection, computerSelection) {
 	let winnerString = `You Win! ${playerSelection} beats ${computerSelection}`
 	let loserString = `You Lose! ${playerSelection} loses to ${computerSelection}`
 	let tieString = `You Tie! ${playerSelection} ties to ${computerSelection}`
-	
+	console.log("round test")
+	console.log(correctPlayerSelection)
+	console.log(computerSelection)
+
 	switch (true) {
 		case correctPlayerSelection === "Rock" && computerSelection === "Scissors":
 			return winnerString;
@@ -144,7 +147,7 @@ function roundRockPaperScissors(playerSelection, computerSelection) {
 
 function computerPlay() {
 
-	let computerHand = getRandomInt(0, 2);
+	let computerHand = getRandomInt(0, 3);
 	// Arbitrarily map numbers to rock, paper, and scissors
 	if (computerHand === 0) {
 		return "Rock"
